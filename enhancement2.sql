@@ -5,4 +5,4 @@ INSERT INTO clients (clientEmail, clientFirstname, clientId, clientLastName,  cl
 UPDATE clients SET clientLevel = 3 WHERE clientEmail = 'tony@starkent.com';
 
 --Query 3
-tes
+UPDATE
