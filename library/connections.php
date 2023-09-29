@@ -16,11 +16,11 @@ function phpmotorsConnect()
     try {
     $link = new PDO($dsn, $username, $password, $options);
 
-    /*return $link;*/
+    return $link;
 
-    if (is_object($link)) {
+    /*if (is_object($link)) {
         echo 'Woohoo! It is working!!!';
-    }
+    }*/
 
     } catch (PDOException $e) {
         /*echo 'Connection failed: ' . $e->getMessage();*/
@@ -28,5 +28,3 @@ function phpmotorsConnect()
         exit;
     }
 }
-
-phpmotorsConnect();

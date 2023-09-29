@@ -11,7 +11,7 @@ UPDATE inventory SET invDescription = REPLACE(invDescription, 'small interior', 
 SELECT i.invModel, c.classificationName FROM inventory i INNER JOIN carclassification c ON i.classificationId = c.classificationId WHERE c.classificationName = 'SUV';
 
 --Query 5
-DELETE FROM inventory WHERE invModel = 'Jeep Wrangler';
+DELETE FROM inventory WHERE invModel = 'Wrangler' AND invMake = 'Jeep';
 
 --Query 6
 UPDATE Inventory SET invImage = CONCAT('/phpmotors', invImage), invThumbnail = CONCAT('/phpmotors', invThumbnail);
