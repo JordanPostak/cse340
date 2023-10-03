@@ -13,6 +13,10 @@
         <header>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
         </header>
+        <nav>
+             <?php //require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; 
+             echo $navList; ?> 
+        </nav>
         <main>
             <h1>Content Title Here</h1>
         </main>
