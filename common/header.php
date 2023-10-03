@@ -4,6 +4,3 @@
         <a href="#">My Account</a>
     </div>
 </div>
-<nav>
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?>
-</nav>
