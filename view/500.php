@@ -10,20 +10,10 @@
 <body>
     <div class=border>
         <header>
-        <img src="../images/site/logo.png" alt="PHP Motors Logo"><div class="account_link">
-        <div class="account_link">
-            <a href="#">My Account</a>
-        </div>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
         </header>
         <nav>
-        <ul>
-            <li><a href="../home.php">Home</a></li>
-            <li><a href="#">Classic</a></li>
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">SUV</a></li>
-            <li><a href="#">Trucks</a></li>
-            <li><a href="#">Used</a></li>
-        </ul>
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?>
         </nav>
         <main>
             <h1>Server Error</h1>

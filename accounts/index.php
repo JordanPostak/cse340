@@ -36,7 +36,7 @@ switch ($action) {
         break;
 
     default:
-        include $_SERVER['DOCUMENT_ROOT'] .'/phpmotors/view/home.php';
+        include $_SERVER['DOCUMENT_ROOT'] .'/view/home.php';
         break;
 }
 
