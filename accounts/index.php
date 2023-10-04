@@ -25,17 +25,19 @@ $action = filter_input(INPUT_POST, 'action');
   $action = filter_input(INPUT_GET, 'action');
  }
 
-//Switch Statement
- switch ($action){
- case '':
- 
-  
- break;
- 
- default:
+// Switch Statement
+switch ($action) {
+    case 'login':
+        include 'view/login.php';
+        break;
 
- break;
-  
+    case 'registration':
+        include 'view/registration.php';
+        break;
+
+    default:
+        // Handle other cases or redirect to an appropriate page
+        break;
 }
 
 ?>

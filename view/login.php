@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/base.css?v=<?php echo time(); ?>">
     <link rel="icon" type="image/ico" href="images/site/logo.png">
-    <title>PHP Motors</title>
+    <title>PHP Motors login</title>
 </head>
 <body>
     <div class=border>
@@ -17,7 +17,7 @@
              echo $navList; ?> 
         </nav>
         <main>
-            <h1>Content Title Here</h1>
+        <a href="/phpmotors/accounts/index.php?action=registration">Create an Account</a>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>

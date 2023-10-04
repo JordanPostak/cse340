@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/base.css?v=<?php echo time(); ?>">
     <link rel="icon" type="image/ico" href="images/site/logo.png">
-    <title>PHP Motors</title>
+    <title>PHP Motors registration</title>
 </head>
 <body>
     <div class=border>
