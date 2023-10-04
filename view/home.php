@@ -73,7 +73,7 @@
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="scripts/last_updated.js"></script>
+        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/base.css?v=<?php echo time(); ?>">
-    <link rel="icon" type="image/ico" href="../images/site/logo.png">
+    <link rel="stylesheet" href="css/base.css?v=<?php echo time(); ?>">
+    <link rel="icon" type="image/ico" href="images/site/logo.png">
     <title>500</title>
 </head>
 <body>
@@ -32,7 +32,7 @@
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="scripts/last_updated.js"></script>
+        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
 </body>
 </html>

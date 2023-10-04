@@ -28,15 +28,15 @@ $action = filter_input(INPUT_POST, 'action');
 // Switch Statement
 switch ($action) {
     case 'login':
-        include 'view/login.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
         break;
 
     case 'registration':
-        include 'view/registration.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
         break;
 
     default:
-        // Handle other cases or redirect to an appropriate page
+        include $_SERVER['DOCUMENT_ROOT'] .'/phpmotors/view/home.php';
         break;
 }
 

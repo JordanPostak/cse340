@@ -27,13 +27,16 @@ $action = filter_input(INPUT_POST, 'action');
 
 //Switch Statement
  switch ($action){
- case 'template':
- include 'view/template.php';
-  
-  break;
+  case 'template':
+      include 'view/template.php';
+      break;
+
+      case 'error':
+        include 'view/500.php';
+        break;
  
- default:
-  include 'view/home.php';
+      default:
+        include 'view/home.php';
 }
 
 ?>
