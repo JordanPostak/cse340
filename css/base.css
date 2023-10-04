@@ -33,6 +33,9 @@ header .above_nav a {
     color: inherit;
     font-size: 1rem;
 }
+header .above_nav a:hover {
+    color: var(--color4);
+}
 .account_link {
     position: absolute;
     top: 20px;
@@ -70,6 +73,7 @@ nav a {
 }
 nav a:hover {
     background-color: var(--color4);
+    border-radius: 5px;
 }
 
 /*Main Section*/
@@ -103,17 +107,7 @@ main h3 {
     position: relative;
     left: 50%; 
     transform: translateX(-50%);
-    padding: 10px;
     width: 150px;
-    background-color: var(--color7);
-    color: var(--color5);
-    font-size: 1.5rem;
-}
-.own_button:hover{
-    cursor: pointer;
-}
-.own_button:active{
-    background-color: var(--color4);
 }
 .hero img {
     background-size: cover;
@@ -135,6 +129,7 @@ main h3 {
     height: 100px;
     background-color: var(--color4);
     border: 2px solid var(--color5);
+    border-radius: 5px;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -187,17 +182,19 @@ form input[type="password"] {
     font-size: 16px;
 }
 
-form button[type="submit"] {
+form button[type="submit"], .own_button {
     background-color: var(--color7);
     color: var(--color5);
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 16px;
     cursor: pointer;
 }
 
-form button[type="submit"]:hover {
+form button[type="submit"]:hover, .own_button:hover {
     background-color: var(--color4);
     color: var(--color6);
 }
@@ -274,7 +271,8 @@ footer {
     .hero img {
         margin-top: 20px;
         background-size: cover;
-        width: 100%;
+        width: 80%;
+        margin-left: 10%;
     }
     .toggle_bot {
         display: grid;
