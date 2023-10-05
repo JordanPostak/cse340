@@ -1,3 +1,1 @@
-<ul>
-    <?php echo $navList; ?>
-</ul>
+<?php echo $navList; ?>

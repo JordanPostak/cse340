@@ -29,7 +29,7 @@
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-                <h3>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</h3>
+                <h2>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</h2>
 
                 <button type="submit">Register</button>
             </form>

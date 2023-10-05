@@ -210,13 +210,17 @@ main h1 {
     text-align: center;
     margin-bottom: 20px;
 }
+form h2 {
+text-align: left;
+color: var(--color5);
+}
 
 /* Styling for the "Create an Account" link */
 p a {
     display: block;
     text-align: center;
     text-decoration: none;
-    color: var(--color4);
+    color: var(--color5);
     margin-top: 15px;
 }
 
