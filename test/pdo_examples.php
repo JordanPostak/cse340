@@ -1,6 +1,6 @@
 <?php
 // Include the file that defines phpmotorsConnect()
-include '../library/connections.php'; // Adjust the path as needed
+include '../library/connections.php';
 
 // Example 1: fetch() Method
 $db = phpmotorsConnect();
@@ -13,7 +13,7 @@ echo "Result from fetch() for Ford Model T: <br>";
 echo "Make: " . $row['invMake'] . "<br>";
 echo "Model: " . $row['invModel'] . "<br>";
 echo "Description: " . $row['invDescription'] . "<br>";
-// Add more fields as needed
+
 
 
 // Example 2: fetchAll() Method
