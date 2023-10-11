@@ -23,8 +23,7 @@
                 echo $message;
                 }
                 ?>
-                <form method="post" action="/phpmotors/accounts/index.php">
-                    
+
             <form action="/phpmotors/accounts/index.php" method="post">
                 <label for="firstName">First Name:</label>
                 <input type="text" id="firstName" name="clientFirstname" required>

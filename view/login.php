@@ -17,6 +17,13 @@
         </nav>
         <main>
             <h1>Login</h1>
+
+            <?php
+            if (isset($message)) {
+                echo $message;
+                }
+                ?>
+                
             <form action="/phpmotors/accounts/index.php" method="post">
                 <label for="email">Email Address:</label>
                 <input type="email" id="email" name="email" required>
