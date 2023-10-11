@@ -18,24 +18,26 @@
         <main>
             <h1>Register</h1>
 
-            <?php
-            if (isset($message)) {
-                echo $message;
+            <div class="message-container">
+                <?php
+                if (isset($message)) {
+                    echo $message;
                 }
                 ?>
+            </div>
 
             <form action="/phpmotors/accounts/index.php" method="post">
                 <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="clientFirstname" required>
+                <input type="text" id="firstName" name="clientFirstname">
 
                 <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="clientLastname" required>
+                <input type="text" id="lastName" name="clientLastname">
 
                 <label for="email">Email Address:</label>
-                <input type="email" id="email" name="clientEmail" required>
+                <input type="email" id="email" name="clientEmail">
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="clientPassword" required>
+                <input type="password" id="password" name="clientPassword">
                 <h2>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</h2>
 
                 <button type="submit">Register</button>

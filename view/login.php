@@ -18,18 +18,21 @@
         <main>
             <h1>Login</h1>
 
-            <?php
-            if (isset($message)) {
-                echo $message;
+            <div class="message-container">
+                <?php
+                if (isset($message)) {
+                    echo $message;
                 }
                 ?>
-                
+            </div>
+
+
             <form action="/phpmotors/accounts/index.php" method="post">
                 <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email">
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password">
 
                 <button type="submit">Login</button>
                 <h1>Not yet a member?:</h1>

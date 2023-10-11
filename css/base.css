@@ -12,6 +12,7 @@
     --color5: #3a3a3a;
     --color6: #ffffffff;
     --color7: rgb(255, 187, 0);
+    --color8: #e44b18;
 }
 
 /*body*/
@@ -214,6 +215,18 @@ form h2 {
 text-align: left;
 color: var(--color5);
 }
+
+
+.message-container {
+    justify-content: center;
+    text-align: center;
+    background-color: var(--color6); 
+    color: var(--color8);
+    font-size: 1.5rem;
+    padding: 5px; 
+    margin-bottom: 20px; 
+}
+
 
 /* Styling for the "Create an Account" link */
 p a {
