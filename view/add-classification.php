@@ -30,7 +30,8 @@
             <form action="/phpmotors/vehicles/index.php" method="post">
                 <input type="hidden" name="action" value="add-classification">
                 <!-- Add form fields for classification name -->
-                <input type="text" name="classificationName" placeholder="Classification Name">
+                <label for="classificationName">Classification Name:</label>
+                <input type="text" id="classificationName" name="classificationName" placeholder="Classification Name">
                 <button type="submit">Add Classification</button>
             </form>
         </main>
