@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css?v=<?php echo time(); ?>">
     <link rel="icon" type="image/ico" href="images/site/logo.png">
-    <title>PHP Motors</title>
+    <title>Vehicle Management</title>
 </head>
 <body>
     <div class=border>
@@ -13,10 +13,12 @@
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/header.php'; ?>
         </header>
         <nav>
-            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?> 
+            <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?>  
         </nav>
         <main>
-            <h1>Content Title Here</h1>
+            <h1>Vehicle Management</h1>
+            <p><a href="/phpmotors/vehicles/index.php?action=class">Add Classification</a></p>
+            <p><a href="/phpmotors/vehicles/index.php?action=vehicle">Add Vehicle</a></p>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
