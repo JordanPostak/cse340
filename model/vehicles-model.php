@@ -4,7 +4,7 @@
 * Vehicles Model
 */
 
-//function for inserting a new classification to the carclassifications table.
+//function for inserting a new classification to the carclassification table.
 function insertClassification($classificationName) {
     // Create a connection object from the phpmotors connection function
     $db = phpmotorsConnect();
