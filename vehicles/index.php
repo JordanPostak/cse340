@@ -39,42 +39,38 @@ $classificationList .= '</select>';
 
 //Switch Statement
 switch ($action){
-  case 'class':
-      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
-      break;
+    case 'class':
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
+        break;
 
-  case 'vehicle':
-      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
-      break;
+    case 'vehicle':
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
+        break;
 
-  case 'add-classification':
-      // Handle adding a new classification
-      $classificationName = filter_input(INPUT_POST, 'classificationName');
-  
-      if (empty($classificationName)) {
-          $message = '<p>Please provide a classification name.</p>';
-          include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
-          exit;
-      }
-  
-      // Attempt to insert the classification
-      $success = insertClassification($classificationName);
-  
-      if ($success) {
-          // If insertion is successful, redirect to the vehicle management view
-          header('Location: /phpmotors/vehicles/index.php');
-          exit;
-      } else {
-          // If insertion fails, display an error message in the add-classification view
-          $message = 'Failed to add the classification. Please try again.';
-          include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
-          exit;
-      }
-      break;
-
-  default:
-      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-management.php';
-      break;
+    case 'add-classification':
+        // Handle adding a new classification
+        $classificationName = filter_input(INPUT_POST, 'classificationName');
+    
+        if (empty($classificationName)) {
+            $message = '<p>Please provide a classification name.</p>';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
+            exit;
+        }
+    
+        // Attempt to insert the classification
+        $success = insertClassification($classificationName);
+    
+        if ($success) {
+            // If insertion is successful, redirect to the vehicle management view
+            header('Location: /phpmotors/vehicles/index.php');
+            exit;
+        } else {
+            // If insertion fails, display an error message in the add-classification view
+            $message = 'Failed to add the classification. Please try again.';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
+            exit;
+        }
+        break;
 
     case 'add-vehicle':
         // Handle adding a new vehicle
@@ -118,6 +114,10 @@ switch ($action){
             exit;
         }
     break;
+
+    default:
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-management.php';
+        break;
 }
 
 ?>
