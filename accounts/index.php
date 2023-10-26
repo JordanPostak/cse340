@@ -67,20 +67,23 @@ case 'register':
     }
         break;
 
-    case 'login';
-        // Filter and store the data
-        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
-        $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $clientEmail = checkEmail($clientEmail);
-        $checkPassword = checkPassword($clientPassword);
-
-        // Check for missing data
-        if(empty($clientEmail) || empty($checkPassword)){
-          $message = '<p>Please provide information for all empty form fields.</p>';
-          include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
-          exit;
-        }
-        break;
+        case 'Login':
+          // Filter and store the data
+          $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+          $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+          $clientEmail = checkEmail($clientEmail);
+          $checkPassword = checkPassword($clientPassword);
+      
+          // Check for missing data
+          if (empty($clientEmail) || empty($clientPassword)) {
+              $message = '<p>Please provide information for all empty form fields.</p>';
+              include '../view/login.php';
+          } else {
+              // The login is successful; 
+              $message = "Login case executed!";
+              include '../view/login.php';
+          }
+          break;
 
     case 'loginview':
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
@@ -91,7 +94,7 @@ case 'register':
         break;
 
     default:
-        include $_SERVER['DOCUMENT_ROOT'] .'/view/home.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
         break;
 }
 

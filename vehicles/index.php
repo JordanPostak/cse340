@@ -53,9 +53,10 @@ switch ($action){
     
         if (empty($classificationName)) {
             $message = '<p>Please provide a classification name.</p>';
-            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
+            include '../view/add-classification.php';
             exit;
         }
+        
     
         // Attempt to insert the classification
         $success = insertClassification($classificationName);
@@ -87,7 +88,7 @@ switch ($action){
 
         // Check for missing or invalid data
         if (
-            $classificationId === false || $classificationId === null ||
+            $classificationId === "" || $classificationId === null ||
             empty($invMake) || empty($invModel) || empty($invColor) ||
             empty($invDescription) || empty($invImage) || empty($invThumbnail) ||
             $invPrice === false || $invPrice === null ||

@@ -28,17 +28,17 @@
 
             <!-- Add Classification Form -->
             <form action="/phpmotors/vehicles/index.php" method="post">
-                <input type="hidden" name="action" value="add-classification">
+                <input type="hidden" name="action" value="add-classification" required>
                 <!-- Add form fields for classification name -->
                 <label for="classificationName">Classification Name:</label>
-                <input type="text" id="classificationName" name="classificationName" placeholder="Classification Name">
+                <input type="text" id="classificationName" name="classificationName" placeholder="Classification Name" required>
                 <button type="submit">Add Classification</button>
             </form>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="scripts/last_updated.js"></script>
+        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
 </body>
 </html>

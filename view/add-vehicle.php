@@ -42,28 +42,28 @@
 
                 <!-- Add form fields for vehicle details -->
                 <label for="invMake">Make:</label>
-                <input type="text" name="invMake" id="invMake" placeholder="Make">
+                <input type="text" name="invMake" id="invMake" placeholder="Make" <?php if(isset($invMake)){echo "value='$invMake'";}  ?> required>
 
                 <label for="invModel">Model:</label>
-                <input type="text" name="invModel" id="invModel" placeholder="Model">
+                <input type="text" name="invModel" id="invModel" placeholder="Model" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> required>
 
                 <label for="description">Description:</label>
-                <textarea name="description" id="description" placeholder="Description"></textarea>
+                <textarea name="description" id="description" placeholder="Description" <?php if(isset($description)){echo "value='$description'";}  ?> required></textarea>
 
                 <label for="invImage">Image Path:</label>
-                <input type="text" name="invImage" id="invImage" placeholder="Image Path" value="/phpmotors/images/no-image/no-image.png">
+                <input type="text" name="invImage" id="invImage" placeholder="Image Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invImage)){echo "value='$invImage'";}  ?> required>
 
                 <label for="invThumbnail">Thumbnail Path:</label>
-                <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail Path" value="/phpmotors/images/no-image/no-image.png">
+                <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";}  ?> required>
 
                 <label for="price">Price:</label>
-                <input type="number" name="price" id="price" placeholder="Price" step="0.01">
+                <input type="number" name="price" id="price" placeholder="Price" step="0.01" <?php if(isset($price)){echo "value='$price'";}  ?> required>
 
                 <label for="stock">Stock:</label>
-                <input type="number" name="stock" id="stock" placeholder="Stock">
+                <input type="number" name="stock" id="stock" placeholder="Stock" <?php if(isset($Stock)){echo "value='$Stock'";}  ?> required>
 
                 <label for="invColor">Color:</label>
-                <input type="text" name="invColor" id="invColor" placeholder="Color">
+                <input type="text" name="invColor" id="invColor" placeholder="Color" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> required>
 
                 <button type="submit">Add Vehicle</button>
             </form>
@@ -71,7 +71,7 @@
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="scripts/last_updated.js"></script>
+        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
 </body>
 </html>
