@@ -28,7 +28,7 @@
 
             <!-- Add Classification Form -->
             <form action="/phpmotors/vehicles/index.php" method="post">
-                <input type="hidden" name="action" value="add-classification" required>
+                <input type="hidden" name="action" value="add-classification">
                 <!-- Add form fields for classification name -->
                 <label for="classificationName">Classification Name:</label>
                 <input type="text" id="classificationName" name="classificationName" placeholder="Classification Name" required>
