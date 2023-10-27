@@ -23,16 +23,16 @@ $action = filter_input(INPUT_POST, 'action');
 
 
 // Build the dynamic dropdown select list
-$classificationList = '<select name="classificationId" id="classificationList">';
-$classificationList .= "<option>Choose a Classification</option>";
-foreach ($classifications as $classification) {
-  $classificationList .= "<option value='$classification[classificationId]'";
-  if (isset($classificationId) && $classification['classificationId'] === (int)$classificationId) {
-    $classificationList .= " selected";
-  }
-  $classificationList .= ">$classification[classificationName]</option>";
-}
-$classificationList .= '</select>';
+// $classificationList = '<select name="classificationId" id="classificationList">';
+// $classificationList .= "<option>Choose a Classification</option>";
+// foreach ($classifications as $classification) {
+//   $classificationList .= "<option value='$classification[classificationId]'";
+//   if (isset($classificationId) && $classification['classificationId'] === (int)$classificationId) {
+//     $classificationList .= " selected";
+//   }
+//   $classificationList .= ">$classification[classificationName]</option>";
+// }
+// $classificationList .= '</select>';
 
 //Switch Statement
 switch ($action){

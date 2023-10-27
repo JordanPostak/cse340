@@ -1,16 +1,12 @@
 <?php
-// Test the dynamic dropdown select list
+// Store the dropdown selection code in a variable
 $classificationList = '<select name="classificationId" id="classificationList">';
 $classificationList .= "<option>Choose a Classification</option>";
 foreach ($classifications as $classification) {
-  $classificationList .= "<option value='$classification[classificationId]'";
-  if (isset($classificationId) && $classification['classificationId'] === (int)$classificationId) {
-    $classificationList .= " selected";
-  }
-  $classificationList .= ">$classification[classificationName]</option>";
+    $selected = (isset($classificationId) && $classification['classificationId'] == (int)$classificationId) ? 'selected' : '';
+    $classificationList .= "<option value='{$classification['classificationId']}' $selected>{$classification['classificationName']}</option>";
 }
 $classificationList .= '</select>';
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +44,8 @@ $classificationList .= '</select>';
                     <option value="" disabled selected>Choose car classification</option>
                     <?php
                     foreach ($classifications as $classification) {
-                        echo '<option value="' . $classification['classificationId'] . '">' . $classification['classificationName'] . '</option>';
+                        $selected = ($classification['classificationId'] == $classificationId) ? 'selected' : '';
+                        echo '<option value="' . $classification['classificationId'] . '" ' . $selected . '>' . $classification['classificationName'] . '</option>';
                     }
                     ?>
                 </select>
