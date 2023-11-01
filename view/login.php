@@ -20,14 +20,14 @@
 
             <div class="message-container">
                 <?php
-                if (isset($message)) {
-                    echo $message;
-                }
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                   }
                 ?>
             </div>
 
 
-            <form action="/phpmotors/accounts/index.php" method="post">
+            <form action="/phpmotors/accounts/" method="post">
                 <label for="clientEmail">Email Address:</label>
                 <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required>
 

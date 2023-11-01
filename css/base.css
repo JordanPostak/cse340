@@ -39,8 +39,15 @@ header .above_nav a:hover {
 }
 .account_link {
     position: absolute;
-    top: 20px;
+    top: 30px;
     right: 15px;
+    
+}
+.welcome {
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    color: var(--color4);
 }
 .above_nav img {
     width: 150px;
@@ -322,7 +329,12 @@ footer {
         font-size: 1.2rem;
     }
     .account_link {
+        top: 22px;
         right: 25px;
+    }
+    .welcome {
+        top: 25px;
+        right: 200px;
     }
     .own_card {
         margin: 25px;
