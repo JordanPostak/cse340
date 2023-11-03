@@ -48,14 +48,14 @@ switch ($action) {
 
       // Deal with existing email during registration
       if($existingEmail){
-        $message = '<p>The email address already exists. Do you want to login instead?</p>';
+        $_SESSION['message'] = '<p>The email address already exists. Do you want to login instead?</p>';
         include '../view/login.php';
         exit;
       }
 
     // Check for missing data
     if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)){
-      $message = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
       include '../view/registration.php';
       exit;
     }
@@ -70,10 +70,10 @@ switch ($action) {
     if($regOutcome === 1){
       setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
       $_SESSION['message'] = "Thanks for registering $clientFirstname. Please use your email and password to login.";
-      header('Location: /phpmotors/accounts/?action=login');
+      header('Location: /phpmotors/accounts/?action=loginview');
       exit;
     } else {
-      $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+      $_SESSION['message'] = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
       include '../view/registration.php';
       exit;
     }
@@ -90,11 +90,11 @@ switch ($action) {
 
     // Check for missing data
     if (empty($clientEmail) || empty($clientPassword)) {
-        $message = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
         include '../view/login.php';
     } else {
-        // The login is successful; 
-        $message = "Login Successfull!";
+        // The Login info was incorrect; 
+        $_SESSION['message'] = "Please check your password and try again.";
         include '../view/login.php';
     }
 
@@ -114,8 +114,16 @@ switch ($action) {
     array_pop($clientData);
     //Store the array into the session
     $_SESSION['clientData'] = $clientData;
-    // Send them to the admin view
-    include '../view/admin.php';
+    // Send them to the default view (admin.php)
+    header('Location: /phpmotors/accounts/');
+    exit;
+    break;
+
+  case 'logout':
+    // Log the user out
+    $_SESSION = array(); // Clear all session data
+    session_destroy(); // Destroy the session
+    header("Location: /phpmotors/"); // Redirect to the home page or another desired location
     exit;
     break;
 
@@ -128,7 +136,7 @@ switch ($action) {
     break;
 
   default:
-    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
     break;
 }
 

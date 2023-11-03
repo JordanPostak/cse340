@@ -27,7 +27,7 @@
             </div>
 
 
-            <form action="/phpmotors/accounts/" method="post">
+            <form action="/phpmotors/accounts/index.php" method="post">
                 <label for="clientEmail">Email Address:</label>
                 <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required>
 

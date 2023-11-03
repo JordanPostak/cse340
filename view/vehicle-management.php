@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php 
+// Check if the client is logged in and has a clientLevel greater than 1
+if (!isset($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1) {
+    header("Location: /phpmotors/");
+    exit;
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,8 +23,8 @@
         </nav>
         <main>
             <h1>Vehicle Management</h1>
-            <p><a href="/phpmotors/vehicles/index.php?action=class">Add Classification</a></p>
-            <p><a href="/phpmotors/vehicles/index.php?action=vehicle">Add Vehicle</a></p>
+            <p><a href="/phpmotors/vehicles/index.php?action=class"><button class="manage_button">Add Classification</button></a></p>
+            <p><a href="/phpmotors/vehicles/index.php?action=vehicle"><button class="manage_button">Add Vehicle</button></a></p>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>

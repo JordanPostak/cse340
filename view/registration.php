@@ -42,7 +42,7 @@
                
 
                 <button type="submit">Register</button>
-                <!-- Add the action name - value pair -->
+                <!-- Action name - value pair -->
                 <input type="hidden" name="action" value="register">
             </form>
         </main>

@@ -5,7 +5,7 @@
 */
 
 
-//Refister a new client
+//Register a new client
 function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword){
     // Create a connection object using the phpmotors connection function
     $db = phpmotorsConnect();
@@ -56,7 +56,7 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     $db = phpmotorsConnect();
     $sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel, clientPassword
         FROM clients
-        WHERE clientsEmail = :clientEmail';
+        WHERE clientEmail = :clientEmail';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
     $stmt->execute();

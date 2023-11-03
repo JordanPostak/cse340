@@ -1,4 +1,11 @@
 <?php
+
+// Check if the client is logged in and has a clientLevel greater than 1
+if (!isset($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1) {
+    header("Location: /phpmotors/");
+    exit;
+}
+
 // Store the dropdown selection code in a variable
 $classificationList = '<select name="classificationId" id="classificationList">';
 $classificationList .= "<option>Choose a Classification</option>";

@@ -41,13 +41,20 @@ header .above_nav a:hover {
     position: absolute;
     top: 30px;
     right: 15px;
-    
+    transition: transform 0.5s;
+}
+.account_link:hover {
+    transform: scale(1.1);
 }
 .welcome {
     position: absolute;
     top: 10px;
     right: 16px;
-    color: var(--color4);
+    color: var(--color5);
+    transition: transform 0.5s;
+}
+.welcome:hover {
+    transform: scale(1.1);
 }
 .above_nav img {
     width: 150px;
@@ -82,6 +89,12 @@ nav a {
 nav a:hover {
     background-color: var(--color4);
     border-radius: 5px;
+}
+nav li {
+    transition: transform 0.5s;
+}
+nav li:hover {
+    transform: scale(1.1);
 }
 
 /*Main Section*/
@@ -222,7 +235,7 @@ form select {
     background-color: white;
 }
 
-form button[type="submit"], .own_button {
+form button[type="submit"], .own_button, .manage_button {
     background-color: var(--color7);
     color: var(--color5);
     border: none;
@@ -236,11 +249,19 @@ form button[type="submit"], .own_button {
     transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-form button[type="submit"]:hover {
+form button[type="submit"]:hover, .manage_button:hover {
     background-color: var(--color4);
     color: var(--color6);
     transform: scale(1.1);
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+form button[type="submit"]:active,
+.manage_button:active {
+    background-color: var(--color8);
+    color: var(--color5);
+    transform: scale(0.9);
+    box-shadow: 3px 3px 11px rgba(0, 0, 0, 0.7);
 }
 
 .own_button:hover {
@@ -248,6 +269,12 @@ form button[type="submit"]:hover {
     color: var(--color6);
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
     transform: translateX(-50%) scale(1.1);
+}
+.own_button:active {
+    transform: translateX(-50%) scale(0.9);
+    background-color: var(--color8);
+    color: var(--color5);
+    box-shadow: 3px 3px 11px rgba(0, 0, 0, 0.7);
 }
 
 .password-requirements {
@@ -332,8 +359,11 @@ footer {
         top: 22px;
         right: 25px;
     }
+    .cool_link a, .cool p{
+        color: var(--color5);
+    }
     .welcome {
-        top: 25px;
+        top: 22px;
         right: 200px;
     }
     .own_card {
