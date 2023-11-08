@@ -322,7 +322,7 @@ p a {
 p a:hover {
     text-decoration: underline;
 }
-    
+  
 /*Footer Design*/
 footer hr {
     height: 4px;
@@ -332,6 +332,66 @@ footer {
     font-size: .8rem;
     text-align: center;
 }
+
+/* Apply styles to the table container */
+.table-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto; /* Center the container horizontally */
+    max-width: 800px; /* Adjust the maximum width to control the container size */
+  }
+  
+  /* Apply styles to the table */
+  #inventoryDisplay {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style the table headers */
+  #inventoryDisplay th {
+    background-color: var(--color5);
+    color: var(--color6);
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Style the table data rows */
+  #inventoryDisplay td {
+    padding: 10px;
+    border: 1px solid var(--color5);
+  }
+  
+  /* Style the links in the table */
+  #inventoryDisplay a {
+    text-decoration: none;
+    color: var(--color4);
+  }
+  
+  /* Style the links on hover */
+  #inventoryDisplay a:hover {
+    text-decoration: underline;
+    color: var(--color8);
+  }
+
+  select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid var(--color5);
+    border-radius: 5px;
+    background-color: var(--color6);
+    color: var(--color4);
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  select:focus, select:hover {
+    border-color: var(--color4);
+  }
 
 @media screen and (min-width: 767px) {
     body {

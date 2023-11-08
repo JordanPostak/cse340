@@ -25,11 +25,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1
             <h1>Vehicle Management</h1>
             <p><a href="/phpmotors/vehicles/index.php?action=class"><button class="manage_button">Add Classification</button></a></p>
             <p><a href="/phpmotors/vehicles/index.php?action=vehicle"><button class="manage_button">Add Vehicle</button></a></p>
+            <div class="table-area">
+            <?php
+                if (isset($message)) { 
+                echo $message; 
+                } 
+                if (isset($classificationList)) { 
+                echo '<h2>Vehicles By Classification</h2>'; 
+                echo '<p>Choose a classification to see those vehicles</p>'; 
+                echo $classificationList; 
+                }
+            ?>
+            <noscript>
+                <p><strong>JavaScript Must Be Enabled to Use this Page.</strong>
+                </p>
+            </noscript>
+            <table id="inventoryDisplay"></table>
+            </div>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
+    <script src="/phpmotors/scripts/last_updated.js"></script>
+    <script src="/phpmotors/scripts/inventory.js"></script>
 </body>
 </html>
