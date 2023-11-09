@@ -48,14 +48,14 @@ switch ($action) {
 
       // Deal with existing email during registration
       if($existingEmail){
-        $_SESSION['message'] = '<p>The email address already exists. Do you want to login instead?</p>';
+        $_SESSION['message'] = '<p class="center red">The email address already exists. Do you want to login instead?</p>';
         include '../view/login.php';
         exit;
       }
 
     // Check for missing data
     if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)){
-      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p class="center red">Please provide information for all empty form fields.</p>';
       include '../view/registration.php';
       exit;
     }
@@ -69,11 +69,11 @@ switch ($action) {
     // Check and report the result
     if($regOutcome === 1){
       setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
-      $_SESSION['message'] = "Thanks for registering $clientFirstname. Please use your email and password to login.";
+      $_SESSION['message'] = '<p class="center red">Thanks for registering $clientFirstname. Please use your email and password to login.</p>';
       header('Location: /phpmotors/accounts/?action=loginview');
       exit;
     } else {
-      $_SESSION['message'] = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+      $_SESSION['message'] = '<p class="center red">Sorry $clientFirstname, but the registration failed. Please try again.</p>';
       include '../view/registration.php';
       exit;
     }
@@ -90,11 +90,11 @@ switch ($action) {
 
     // Check for missing data
     if (empty($clientEmail) || empty($clientPassword)) {
-      $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p class="center red">Please provide information for all empty form fields.</p>';
         include '../view/login.php';
     } else {
         // The Login info was incorrect; 
-        $_SESSION['message'] = "Please check your password and try again.";
+        $_SESSION['message'] = '<p class="center red">Please check your password and try again.</p>';
         include '../view/login.php';
     }
 
@@ -104,7 +104,7 @@ switch ($action) {
     $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
     //If the hashes don't match create an error and return to the login view
     if (!$hashCheck) {
-      $message = '<p>Please check your password and try again.</p>';
+      $message = '<p class="center red">Please check your password and try again.</p>';
       include '../view/login.php';
       exit;
     }
@@ -114,6 +114,10 @@ switch ($action) {
     array_pop($clientData);
     //Store the array into the session
     $_SESSION['clientData'] = $clientData;
+
+    // Set a success message
+    $_SESSION['message'] = '<p class="center red">You are logged in.</p>';
+
     // Send them to the default view (admin.php)
     header('Location: /phpmotors/accounts/');
     exit;
@@ -133,6 +137,103 @@ switch ($action) {
 
   case 'registrationview':
     include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+    break;
+
+  case 'update':
+    // Include the view for updating account information
+    include '../view/client-update.php';
+    exit;
+    break;
+
+  case 'updateAccount':
+  
+    // Filter and collect the inputs
+    $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+    $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+  
+    // Validate and check for errors
+    if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+      $message = '<p class="center red">Please provide information for all empty form fields.</p>';
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+      exit;
+    }
+  
+    // Check if the email address is different from the one in the session
+    if ($clientEmail !== $_SESSION['clientData']['clientEmail']) {
+      // Check if the new email address already exists in the clients table
+      $existingEmail = checkExistingEmail($clientEmail);
+  
+      if ($existingEmail) {
+        $message = '<p class="center red">The email address already exists. Please choose a different email address.</p>';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+        exit;
+      }
+    }
+  
+    // Process the update using an appropriate function
+    $updateResult = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+  
+    // Set a success or failure message and store it in the session
+    if ($updateResult) {
+      $_SESSION['message'] = '<p class="center red">Your account information has been updated.</p>';
+    } else {
+      $_SESSION['message'] = '<p class="center red">Sorry, the update failed. Please try again.</p>';
+    }
+  
+    // Query the client data from the database, based on the clientId
+    $clientData = getClientById($clientId);
+  
+    // Store the new client data into the session
+    $_SESSION['clientData'] = $clientData;
+  
+    // Deliver the "client-update.php" view with success or failure message
+    header('Location: /phpmotors/accounts/?action=clientupdate');
+    exit;
+  
+    break;
+  
+  case 'updatePassword':
+
+    // Filter and collect the new password
+    $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+    $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+
+    // Validate the new password
+    $checkPassword = checkPassword($clientPassword);
+
+    if ($checkPassword === 0) {
+      $message = '<p class="center red">Invalid password format. Password must meet the requirements.</p>';
+      $_SESSION['message'] = $message;
+      header('Location: /phpmotors/accounts/?action=update');
+      exit;
+  }
+
+    // Debugging: Print the values
+    var_dump($message);
+
+    // Hash the new password
+    $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+    var_dump($hashedPassword);
+
+    // Update the password in the database
+    $updateResult = updatePassword($hashedPassword, $clientId);
+
+    var_dump($updateResult);
+
+    // Set a success or failure message and store it in the session
+    if ($updateResult) {
+        $_SESSION['message'] = '<p class="center red">Your password has been updated.</p>';
+    } else {
+        $_SESSION['message'] = '<p class="center red">Sorry, the password update failed. Please try again.</p>';
+    }
+
+    // Deliver the "password-update-result.php" view
+    header('Location: /phpmotors/accounts/?action=passwordupdateresult');
+    exit;
+
     break;
 
   default:

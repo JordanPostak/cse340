@@ -140,7 +140,7 @@ switch ($action){
         include '../view/vehicle-update.php';
         exit;
         break;
-
+    
     case 'updateVehicle':
         $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);

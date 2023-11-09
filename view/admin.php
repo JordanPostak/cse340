@@ -21,26 +21,38 @@
         <nav>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?> 
         </nav>
-        <main>
-        <h1>Welcome, <?php echo $_SESSION['clientData']['clientFirstname']; ?></h1>
-        <ul>
-            <li>First name: <?php echo $_SESSION['clientData']['clientFirstname']; ?></li>
-            <li>Last name: <?php echo $_SESSION['clientData']['clientLastname']; ?></li>
-            <li>Email Address: <?php echo $_SESSION['clientData']['clientEmail']; ?></li>
-        </ul>
-        <div class="cool_link">
-        <?php
-            // Check clientLevel to determine if the button should be displayed
-            if ($_SESSION['clientData']['clientLevel'] > 1) {
-                echo '<p><a href="/phpmotors/vehicles/"><button class="manage_button">Manage Vehicles</button></a></p>';
+        <main class="centered-content">
+            <h1>Welcome, <?php echo $_SESSION['clientData']['clientFirstname']; ?></h1>
+
+            <?php
+            // Check if a message exists in the session
+            if (isset($_SESSION['message'])) {
+                echo '<p>' . $_SESSION['message'] . '</p>';
+                unset($_SESSION['message']); // Remove the message from the session to prevent it from displaying again
             }
-        ?>
-        </div>
+            ?>
+
+            <ul>
+                <li>First name: <?php echo $_SESSION['clientData']['clientFirstname']; ?></li>
+                <li>Last name: <?php echo $_SESSION['clientData']['clientLastname']; ?></li>
+                <li>Email Address: <?php echo $_SESSION['clientData']['clientEmail']; ?></li>
+            </ul>
+            <div class="cool_link">
+                <p><a href="/phpmotors/accounts/?action=update" class="manage_button">Update Account Information</a></p>
+            </div>
+            <?php
+            // Check clientLevel to determine if the buttons and heading should be displayed
+            if ($_SESSION['clientData']['clientLevel'] > 1) {
+                echo '<h2>Administer Inventory</h2>';
+                echo '<p>Administrative clients can use the link below to manage the inventory.</p>';
+                echo '<p><a href="/phpmotors/vehicles/" class="manage_button">Manage Vehicles</a></p>';
+            }
+            ?>
         </main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
-        <script src="/phpmotors/scripts/last_updated.js"></script>
     </div>
+    <script src="/phpmotors/scripts/last_updated.js"></script>
 </body>
 </html>

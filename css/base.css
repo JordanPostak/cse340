@@ -14,6 +14,9 @@
     --color7: rgb(255, 187, 0);
     --color8: #e44b18;
 }
+html {
+    margin: 0 auto;
+}
 
 /*body*/
 body {
@@ -60,41 +63,52 @@ header .above_nav a:hover {
     width: 150px;
     margin-right: 2.5rem;
 }
-    /*Navigation*/
-
+/*Navigation*/
 nav {
-    background-color: var(--color5); 
+    background-color: var(--color5);
     color: var(--color6);
-    text-decoration: none;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+    display: flex;
 }
-    
+
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; 
+    display: flex;
+    flex-wrap: wrap;
 }
-    
+
 nav a {
     text-decoration: none;
     color: inherit;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-right: 9px;
-    padding-left: 9px;
-    font-size: 1rem;
+    padding: 3px 12px;
+    font-size: 1.2rem;
 }
+
 nav a:hover {
     background-color: var(--color4);
     border-radius: 5px;
 }
+
+nav a:active {
+    background-color: var(--color8);
+    border-radius: 5px;
+}
+
+
 nav li {
+    padding-top: 5px;
+    padding-bottom: 5px;
     transition: transform 0.5s;
 }
+
 nav li:hover {
     transform: scale(1.1);
+}
+
+nav li:active {
+    transform: scale(0.9);
 }
 
 /*Main Section*/
@@ -236,6 +250,7 @@ form select {
 }
 
 form button[type="submit"], .own_button, .manage_button {
+    display: inline-block; /* Add this line */
     background-color: var(--color7);
     color: var(--color5);
     border: none;
@@ -247,6 +262,7 @@ form button[type="submit"], .own_button, .manage_button {
     cursor: pointer;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
     transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+    font-family: sans-serif;
 }
 
 form button[type="submit"]:hover, .manage_button:hover {
@@ -254,6 +270,7 @@ form button[type="submit"]:hover, .manage_button:hover {
     color: var(--color6);
     transform: scale(1.1);
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
 }
 
 form button[type="submit"]:active,
@@ -392,10 +409,28 @@ footer {
   select:focus, select:hover {
     border-color: var(--color4);
   }
-  .center.red {
+  .center.red, .error{
     text-align: center;
     color: red;
     font-size: 1.2rem;
+}
+
+.centered-content {
+    margin: 0 auto;
+    text-align: center;
+}
+.centered-content ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    list-style: none;
+    padding-inline-start: 0px;
+}
+
+.centered-content ul li {
+    text-align: left;
+    padding: 0.5rem;
 }
 
 @media screen and (min-width: 767px) {
