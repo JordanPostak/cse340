@@ -13,6 +13,7 @@
     --color6: #ffffffff;
     --color7: rgb(255, 187, 0);
     --color8: #e44b18;
+    --color9: #036fae;
 }
 html {
     margin: 0 auto;
@@ -122,7 +123,7 @@ main h1 {
 main h2 {
     margin-top: -5px;
     font-size: 1rem;
-    color: var(--color4);
+    color: var(--color9);
     font-weight: bold;
 }
 .boring_text {
@@ -312,7 +313,7 @@ main h1 {
 }
 form h2 {
 text-align: left;
-color: var(--color5);
+color: var(--color9);
 }
 
 

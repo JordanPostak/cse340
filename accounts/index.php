@@ -155,7 +155,7 @@ switch ($action) {
   
     // Validate and check for errors
     if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
-      $message = '<p class="center red">Please provide information for all empty form fields.</p>';
+      $_SESSION['message'] = '<p class="center red">Please provide information for all empty form fields.</p>';
       include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
       exit;
     }
@@ -166,7 +166,7 @@ switch ($action) {
       $existingEmail = checkExistingEmail($clientEmail);
   
       if ($existingEmail) {
-        $message = '<p class="center red">The email address already exists. Please choose a different email address.</p>';
+        $_SESSION['message'] = '<p class="center red">The email address already exists. Please choose a different email address.</p>';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
         exit;
       }
@@ -206,8 +206,7 @@ switch ($action) {
     $checkPassword = checkPassword($clientPassword);
 
     if ($checkPassword === 0) {
-      $message = '<p class="center red">Invalid password format. Password must meet the requirements.</p>';
-      $_SESSION['message'] = $message;
+      $_SESSION['message'] = '<p class="center red">Invalid password format. Password must meet the requirements.</p>';
       header('Location: /phpmotors/accounts/?action=update');
       exit;
   }
