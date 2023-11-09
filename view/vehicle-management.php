@@ -4,6 +4,10 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1
     header("Location: /phpmotors/");
     exit;
 }
+
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,3 +55,4 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['clientData']['clientLevel'] <= 1
     <script src="/phpmotors/scripts/inventory.js"></script>
 </body>
 </html>
+<?php unset($_SESSION['message']); ?>

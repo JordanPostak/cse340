@@ -392,6 +392,11 @@ footer {
   select:focus, select:hover {
     border-color: var(--color4);
   }
+  .center.red {
+    text-align: center;
+    color: red;
+    font-size: 1.2rem;
+}
 
 @media screen and (min-width: 767px) {
     body {

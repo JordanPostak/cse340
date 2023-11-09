@@ -64,8 +64,8 @@ $classificationList .= '</select>';
                 <label for="invModel">Model:</label>
                 <input type="text" name="invModel" id="invModel" placeholder="Model" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> required>
 
-                <label for="description">Description:</label>
-                <textarea name="description" id="description" placeholder="Description" <?php if(isset($description)){echo "value='$description'";}  ?> required></textarea>
+                <label for="invDescription">Description:</label>
+                <textarea name="invDescription" id="invDescription" placeholder="Description" <?php if(isset($invDescription)){echo "value='$invDescription'";}  ?> required></textarea>
 
                 <label for="invImage">Image Path:</label>
                 <input type="text" name="invImage" id="invImage" placeholder="Image Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invImage)){echo "value='$invImage'";}  ?> required>
@@ -73,11 +73,11 @@ $classificationList .= '</select>';
                 <label for="invThumbnail">Thumbnail Path:</label>
                 <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";}  ?> required>
 
-                <label for="price">Price:</label>
-                <input type="number" name="price" id="price" placeholder="Price" step="0.01" <?php if(isset($price)){echo "value='$price'";}  ?> required>
+                <label for="invPrice">Price:</label>
+                <input type="number" name="invPrice" id="invPrice" placeholder="Price" step="0.01" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> required>
 
-                <label for="stock">Stock:</label>
-                <input type="number" name="stock" id="stock" placeholder="Stock" <?php if(isset($Stock)){echo "value='$Stock'";}  ?> required>
+                <label for="invStock">Stock:</label>
+                <input type="number" name="invStock" id="invStock" placeholder="Stock" <?php if(isset($invStock)){echo "value='$invStock'";}  ?> required>
 
                 <label for="invColor">Color:</label>
                 <input type="text" name="invColor" id="invColor" placeholder="Color" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> required>
