@@ -180,6 +180,8 @@ switch ($action) {
       $_SESSION['message'] = '<p class="center red">Your account information has been updated.</p>';
     } else {
       $_SESSION['message'] = '<p class="center red">Sorry, the update failed. Please try again.</p>';
+      include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+      exit;
     }
   
     // Query the client data from the database, based on the clientId

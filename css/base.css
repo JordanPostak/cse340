@@ -256,8 +256,8 @@ form button[type="submit"], .own_button, .manage_button {
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     font-size: 16px;
     cursor: pointer;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
