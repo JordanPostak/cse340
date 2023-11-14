@@ -39,17 +39,19 @@ function buildClassificationList($classifications){
    return $classificationList; 
   }
 
-  // function to build a display of vehicles within an unordered list
-  function buildVehiclesDisplay($vehicles){
+// function to build a display of vehicles within an unordered list
+function buildVehiclesDisplay($vehicles){
+   $baseURL = '/phpmotors';  // Adjust this based on your project structure
    $dv = '<ul id="inv-display">';
    foreach ($vehicles as $vehicle) {
-    $dv .= '<li>';
-    $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-    $dv .= '<hr>';
-    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-    $dv .= "<span>$vehicle[invPrice]</span>";
-    $dv .= '</li>';
+       $thumbnailPath = $baseURL . $vehicle['invThumbnail'];
+       $dv .= '<li>';
+       $dv .= "<img src='$thumbnailPath' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+       $dv .= '<hr>';
+       $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+       $dv .= "<span>$vehicle[invPrice]</span>";
+       $dv .= '</li>';
    }
    $dv .= '</ul>';
    return $dv;
-  }
+}
