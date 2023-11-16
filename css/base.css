@@ -7,12 +7,12 @@
     /* color palette */
     --color1: #bababa;
     --color2:#8d8d8d;
-    --color3: #a6cbeb;
+    --color3: #c5dbee;
     --color4: #4c96d7;
     --color5: #3a3a3a;
     --color6: #ffffffff;
     --color7: rgb(255, 187, 0);
-    --color8: #e44b18;
+    --color8: #cb3d0d;
     --color9: #036fae;
 }
 html {
@@ -119,6 +119,7 @@ main {
 main h1 {
     font-size: 1.5rem;
     font-weight: bold;
+    color: var(--color9);
 }
 main h2 {
     margin-top: -5px;
@@ -130,6 +131,7 @@ main h2 {
     color: var(--color5);
 }
 main h3 {
+
     margin-top: -15px;
     font-size: .8rem;
     color: var(--color4);
@@ -433,7 +435,90 @@ footer {
     text-align: left;
     padding: 0.5rem;
 }
+/*Vehicle Details*/
+.vehicle-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left; 
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .image-container {
+    flex-shrink: 0;
+    margin-bottom: 40px;
+  }
+  .image-container img{
+    width: 100%;
+    border: 2px solid var(--color8);
+    border-radius: 5px;
+  }
+  .info-container {
+    justify-content: center;
+    text-align: center;
+  }
+  .info-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .info-container .price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color8);
+  }
+  
+  .info-container p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
 
+/*Inventory Display*/
+#inv-display {
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#inv-display li {
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid var(--color8);
+    border-radius: 5px;
+    background-color: var(--color3);
+    text-align: center;
+}
+
+#inv-display img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#inv-display h2 {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: var(--color8);
+}
+
+#inv-display span {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+    color: var(--color9);
+}
+
+#inv-display a {
+    text-decoration: none;
+    color: var(--color8);
+}
 @media screen and (min-width: 767px) {
     body {
         background-image: url('/phpmotors/images/site/small_check.jpg');
@@ -473,7 +558,7 @@ footer {
     .own_button {
         position: absolute;
         left: 150px; 
-        top: 250px;
+        top: 260px;
         font-size: 1rem;
     }
     .hero img {
@@ -510,4 +595,23 @@ footer {
         font-size: .8rem;
         text-align: center;
     }
+
+    /*Vehicle Details*/
+    .vehicle-detail {
+        flex-direction: row;
+        text-align: center;
+      }
+    
+      .image-container {
+        padding: 0;
+        margin-right: 40px;
+        width: 40%;
+      }
+      .image-container img {
+        width: 100%;
+      }
+      .info-container {
+        justify-content: left;
+        text-align: left;
+      }
 }

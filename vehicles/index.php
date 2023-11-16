@@ -215,6 +215,32 @@ switch ($action){
 
           include '../view/classification.php';
         break;
+    
+
+    case 'getVehicle':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+
+        // Check if invId is valid
+        if (!isset($invId) || !is_numeric($invId)) {
+            $message = 'Invalid vehicle ID.';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/error.php';
+            exit;
+        }
+
+        // Get vehicle information by invId using the model function
+        $vehicleInfo = getInvItemInfo($invId);
+
+        // Check if a vehicle is found
+        if (!$vehicleInfo) {
+            $message = 'Sorry, no vehicle information could be found.';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/error.php';
+            exit;
+        }
+
+        // Include the view to display the vehicle information
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+        exit;
+        break;
 
     default:
         $classificationList = buildClassificationList($classifications);

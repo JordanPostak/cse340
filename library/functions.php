@@ -41,17 +41,42 @@ function buildClassificationList($classifications){
 
 // function to build a display of vehicles within an unordered list
 function buildVehiclesDisplay($vehicles){
-   $baseURL = '/phpmotors';  // Adjust this based on your project structure
+   $baseURL = '/phpmotors';
    $dv = '<ul id="inv-display">';
    foreach ($vehicles as $vehicle) {
        $thumbnailPath = $baseURL . $vehicle['invThumbnail'];
+       $vehicleDetailsLink = $baseURL . '/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
+
        $dv .= '<li>';
-       $dv .= "<img src='$thumbnailPath' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-       $dv .= '<hr>';
+       $dv .= "<a href='$vehicleDetailsLink'>";
+       $dv .= "<img src='$thumbnailPath' alt='$vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
        $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-       $dv .= "<span>$vehicle[invPrice]</span>";
+       $dv .= '</a>';
+       $dv .= "<p class='price'>Price: $" . number_format($vehicle['invPrice'], 2) . "</p>";
        $dv .= '</li>';
    }
    $dv .= '</ul>';
    return $dv;
+}
+
+// function to build HTML for displaying detailed information of a specific vehicle
+function buildVehicleDetail($vehicleInfo){
+   $html = '<div class="vehicle-detail">';
+   
+   // Image div
+   $html .= "<div class='image-container'>";
+   $html .= "<img src='/phpmotors{$vehicleInfo['invImage']}' alt='{$vehicleInfo['invMake']} {$vehicleInfo['invModel']}'>";
+   $html .= "</div>";
+
+   // Information div
+   $html .= "<div class='info-container'>";
+   $html .= "<h2>{$vehicleInfo['invModel']} details:</h2>";
+   $html .= "<h2 class='price'>Price: $" . number_format($vehicleInfo['invPrice'], 2) . "</h2>";
+   $html .= "<p>{$vehicleInfo['invDescription']}</p>";
+   $html .= "<h2><strong>Stock:</strong> {$vehicleInfo['invStock']}</h2>";
+   $html .= "<h2><strong>Color:</strong> {$vehicleInfo['invColor']}</h2>";
+   $html .= "</div>";
+
+   $html .= '</div>';
+   return $html;
 }

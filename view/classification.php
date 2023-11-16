@@ -16,10 +16,12 @@
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?> 
         </nav>
         <main>
-        <h1><?php echo $classificationName; ?> vehicles</h1>
+        <div class="message-container">
         <?php if(isset($message)){
         echo $message; }
         ?>
+        </div>
+        <h1><?php echo $classificationName; ?> vehicles</h1>
         <?php if(isset($vehicleDisplay)){
         echo $vehicleDisplay;
         } ?>
