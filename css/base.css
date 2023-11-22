@@ -139,7 +139,9 @@ main h3 {
 .own_card {
     position: absolute;
     margin: 5px;
+    padding: 5px;
     background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
 }
 .own_button {
     position: relative;
@@ -151,6 +153,8 @@ main h3 {
 .hero img {
     background-size: cover;
     width: 100%;
+    border: 2px solid var(--color8);
+    border-radius: 5px;
 }
 .reviews {
     margin-top: 100px;
@@ -564,8 +568,8 @@ footer {
     .hero img {
         margin-top: 20px;
         background-size: cover;
-        width: 80%;
-        margin-left: 10%;
+        width: 60%;
+        margin-left: 20%;
     }
     .toggle_bot {
         display: grid;

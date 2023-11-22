@@ -24,7 +24,7 @@
                     <h3>Superman doors</h3>
                     <h3>Fuzzy dice!</h3>
                 </div>
-                <img src="images/delorean.jpg" alt="delorean">
+                <img src="images/vehicles/delorean.jpg" alt="delorean">
                 <button class=own_button>Own Today</button>
             </div>
             <div class="toggle_bot">
