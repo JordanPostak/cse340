@@ -60,26 +60,36 @@ function buildVehiclesDisplay($vehicles){
 }
 
 // function to build HTML for displaying detailed information of a specific vehicle
-function buildVehicleDetail($vehicleInfo){
-   $html = '<div class="vehicle-detail">';
-   
-   // Image div
-   $html .= "<div class='image-container'>";
-   $html .= "<img src='/phpmotors{$vehicleInfo['invImage']}' alt='{$vehicleInfo['invMake']} {$vehicleInfo['invModel']}'>";
-   $html .= "</div>";
-
-   // Information div
-   $html .= "<div class='info-container'>";
-   $html .= "<h2>{$vehicleInfo['invModel']} details:</h2>";
-   $html .= "<h2 class='price'>Price: $" . number_format($vehicleInfo['invPrice'], 2) . "</h2>";
-   $html .= "<p>{$vehicleInfo['invDescription']}</p>";
-   $html .= "<h2><strong>Stock:</strong> {$vehicleInfo['invStock']}</h2>";
-   $html .= "<h2><strong>Color:</strong> {$vehicleInfo['invColor']}</h2>";
-   $html .= "</div>";
-
-   $html .= '</div>';
-   return $html;
-}
+function buildVehicleDetail($vehicleInfo, $thumbnails = array()){
+    $html = '<div class="vehicle-detail">';
+    
+    // Image div
+    $html .= "<div class='image-container'>";
+    $html .= "<img src='{$vehicleInfo['invImage']}' alt='{$vehicleInfo['invMake']} {$vehicleInfo['invModel']}'>";
+    $html .= "<h2>Additional Images</h2>"; // Title for thumbnails
+    $html .= "</div>";
+ 
+    // Thumbnails div with title
+    if (!empty($thumbnails)) {
+        $html .= '<div class="thumbnails-container">';
+        foreach ($thumbnails as $thumbnail) {
+            $html .= "<img src='{$thumbnail['imgPath']}' alt='Thumbnail'>";
+        }
+        $html .= '</div>';
+    }
+ 
+    // Information div
+    $html .= "<div class='info-container'>";
+    $html .= "<h2>{$vehicleInfo['invModel']} details:</h2>";
+    $html .= "<h2 class='price'>Price: $" . number_format($vehicleInfo['invPrice'], 2) . "</h2>";
+    $html .= "<p>{$vehicleInfo['invDescription']}</p>";
+    $html .= "<h2><strong>Stock:</strong> {$vehicleInfo['invStock']}</h2>";
+    $html .= "<h2><strong>Color:</strong> {$vehicleInfo['invColor']}</h2>";
+    $html .= "</div>";
+ 
+    $html .= '</div>';
+    return $html;
+ }
 
 
 /* * ********************************

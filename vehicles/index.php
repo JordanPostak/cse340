@@ -12,6 +12,8 @@ require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
 // Get the functions library
 require_once '../library/functions.php';
+// Get the uploads model for use as needed
+require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/model/uploads-model.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -236,6 +238,9 @@ switch ($action){
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/error.php';
             exit;
         }
+
+        // Get thumbnail images by vehicleId using the new function
+    $thumbnails = getThumbnailsByVehicleId($invId);
 
         // Include the view to display the vehicle information
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';

@@ -76,17 +76,21 @@ function getInventoryByClassification($classificationId){
     return $inventory; 
    }
 
-   // Get vehicle information by invId
+  // Get vehicle information by invId with primary image
 function getInvItemInfo($invId){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $sql = 'SELECT i.*, img.imgPath AS invImage
+            FROM inventory i
+            LEFT JOIN images img ON i.invId = img.invId AND img.imgPrimary = 1
+            WHERE i.invId = :invId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->execute();
     $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
     $stmt->closeCursor();
     return $invInfo;
-   }
+}
 
 // Update a vehicle
 function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId) {
@@ -121,16 +125,22 @@ function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThum
    }
 
 // function to get a list of vehicles based on the classification
-   function getVehiclesByClassification($classificationName){
+function getVehiclesByClassification($classificationName){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $sql = 'SELECT i.*, img.imgPath, img.imgPrimary
+            FROM inventory i
+            INNER JOIN images img ON i.invId = img.invId
+            WHERE i.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)
+            AND img.imgName LIKE :thumbnailPattern
+            AND img.imgPrimary = 1';  // Only select rows where imgPrimary is 1
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
+    $stmt->bindValue(':thumbnailPattern', '%-tn%', PDO::PARAM_STR);
     $stmt->execute();
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $vehicles;
-   }
+}
 
    // Get information for all vehicles
    function getVehicles(){

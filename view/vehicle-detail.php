@@ -22,27 +22,32 @@
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/navigation.php'; ?> 
         </nav>
         <main>
-            <h1><?php 
-    if (isset($vehicleInfo['invMake']) && isset($vehicleInfo['invModel'])) { 
-        echo "$vehicleInfo[invMake] $vehicleInfo[invModel]"; 
-    } elseif (isset($invMake) && isset($invModel)) { 
-        echo "$invMake $invModel Detail"; 
-    }
+    <h1><?php 
+        if (isset($vehicleInfo['invMake']) && isset($vehicleInfo['invModel'])) { 
+            echo "$vehicleInfo[invMake] $vehicleInfo[invModel]"; 
+        } elseif (isset($invMake) && isset($invModel)) { 
+            echo "$invMake $invModel Detail"; 
+        }
     ?></h1>
+
     <div class="message-container">
-                <?php
-                if (isset($message)) {
-                    echo $message;
-                }
-                ?>
-            </div>
-            <div class="vehicle-details">
-            <?php
-                // Call the buildVehicleDetail function to get HTML for displaying detailed information
-                echo buildVehicleDetail($vehicleInfo);
-                ?>
-            </div>
-        </main>
+        <?php
+        if (isset($message)) {
+            echo $message;
+        }
+        ?>
+    </div>
+
+    <div class="vehicle-details">
+        <?php
+        // Call the buildVehicleDetail function to get HTML for displaying detailed information
+        echo buildVehicleDetail($vehicleInfo, $thumbnails);
+        ?>
+
+        <!-- Move the closing div tag for vehicle-details here -->
+    </div>
+
+</main>
         <footer>
             <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/common/footer.php'; ?>
         </footer>
