@@ -248,13 +248,19 @@ form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid var(--color4);
+    border: 2px solid var(--color9);
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
 }
-
-form button[type="submit"], .own_button, .manage_button {
+.file-btn {
+    margin-left: -20px;
+    width: 110%;
+}
+input[type="file"]::-webkit-file-upload-button {
+    margin: 20px;
+}
+form button[type="submit"], .own_button, .manage_button, .upload-button, input[type="file"]::-webkit-file-upload-button {
     display: inline-block; /* Add this line */
     background-color: var(--color7);
     color: var(--color5);
@@ -269,8 +275,14 @@ form button[type="submit"], .own_button, .manage_button {
     transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
     font-family: sans-serif;
 }
-
-form button[type="submit"]:hover, .manage_button:hover {
+input[type="file"]::-webkit-file-upload-button:hover{
+    background-color: var(--color4);
+    color: var(--color6);
+    transform: scale(1.1);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+}
+form button[type="submit"]:hover, .manage_button:hover, .upload-button:hover {
     background-color: var(--color4);
     color: var(--color6);
     transform: scale(1.1);
@@ -279,7 +291,7 @@ form button[type="submit"]:hover, .manage_button:hover {
 }
 
 form button[type="submit"]:active,
-.manage_button:active {
+.manage_button:active, .upload-button:active, input[type="file"]::-webkit-file-upload-button:active {
     background-color: var(--color8);
     color: var(--color5);
     transform: scale(0.9);
@@ -301,7 +313,7 @@ form button[type="submit"]:active,
 
 .password-requirements {
     font-size: 78%;
-    color: var(--color4); 
+    color: var(--color9); 
 }
 
 /* Additional styles for the Login form */
@@ -355,24 +367,21 @@ footer {
     text-align: center;
 }
 
-/* Apply styles to the table container */
 .table-area {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin: 0 auto; /* Center the container horizontally */
-    max-width: 800px; /* Adjust the maximum width to control the container size */
+    margin: 0 auto; 
+    max-width: 800px; 
   }
   
-  /* Apply styles to the table */
   #inventoryDisplay {
     width: 100%;
     border-collapse: collapse;
   }
   
-  /* Style the table headers */
   #inventoryDisplay th {
     background-color: var(--color5);
     color: var(--color6);
@@ -380,19 +389,16 @@ footer {
     text-align: left;
   }
   
-  /* Style the table data rows */
   #inventoryDisplay td {
     padding: 10px;
     border: 1px solid var(--color5);
   }
   
-  /* Style the links in the table */
   #inventoryDisplay a {
     text-decoration: none;
     color: var(--color4);
   }
   
-  /* Style the links on hover */
   #inventoryDisplay a:hover {
     text-decoration: underline;
     color: var(--color8);
@@ -405,7 +411,7 @@ footer {
     border: 1px solid var(--color5);
     border-radius: 5px;
     background-color: var(--color6);
-    color: var(--color4);
+    color: var(--color9);
     font-size: 16px;
     cursor: pointer;
     margin-bottom: 20px;
@@ -530,25 +536,25 @@ footer {
 }
 .vehicle-detail {
     display: flex;
-    flex-direction: column; /* Default: column for small screens */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
 }
 
 .thumbnails-container {
     display: flex;
-    flex-direction: row; /* Default: column */
-    align-items: center; /* Center items horizontally */
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    flex-direction: column; 
+    align-items: center; 
+    flex-wrap: wrap; 
 }
 .image-container img{
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
     transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
 }
 .thumbnails-container img {
-    width: 100px; /* Adjust thumbnail width as needed */
+    width: 200px;
     height: auto;
-    margin: 5px; /* Add some margin between thumbnails */
+    margin: 5px; 
     border: 1px solid var(--color8);
     border-radius: 5px;
     transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
@@ -562,13 +568,18 @@ footer {
 .info-container {
     margin-top: 20px;
   }
+  fieldset {
+    border: 2px solid var(--color8);
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
 @media screen and (min-width: 767px) {
     .image-container h2{
         display: none;
     }
     .vehicle-detail {
         display: grid;
-        grid-template-columns: 1fr 3fr 2fr; /* Adjust column widths as needed */
+        grid-template-columns: 1fr 3fr 2fr; 
         align-items: start; /* Align items to the top vertically */
     }
 
@@ -576,7 +587,9 @@ footer {
         flex-direction: column; /* Thumbnails on the left for large screens */
         order: -1; /* Change the order, so thumbnails come first in the layout */
     }
-
+    .thumbnails-container img {
+        width: 90px;
+    }
     .thumbnails-container img:hover {
         transform: scale(2) translateX(25%);
         box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
@@ -585,7 +598,6 @@ footer {
         background-image: url('/phpmotors/images/site/small_check.jpg');
         background-color: #f0f0f0;
         background-repeat: no-repeat;
-        background-size: cover;
         margin-top: 10px;
         margin-left: 50px;
         margin-right: 50px;
