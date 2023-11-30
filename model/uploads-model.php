@@ -7,7 +7,7 @@ function storeImages($imgPath, $invId, $imgName, $imgPrimary) {
     $stmt = $db->prepare($sql);
 
     // Store the full-size image information
-    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_STR);
     $stmt->bindValue(':imgPath', $imgPath, PDO::PARAM_STR);
     $stmt->bindValue(':imgName', $imgName, PDO::PARAM_STR);
     $stmt->bindValue(':imgPrimary', $imgPrimary, PDO::PARAM_INT);
@@ -69,7 +69,7 @@ function getThumbnailsByVehicleId($vehicleId){
     $db = phpmotorsConnect();
     $sql = 'SELECT imgPath FROM images WHERE invId = :vehicleId AND imgName LIKE :thumbnailPattern';
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':vehicleId', $vehicleId, PDO::PARAM_INT);
+    $stmt->bindValue(':vehicleId', $vehicleId, PDO::PARAM_STR);
     $stmt->bindValue(':thumbnailPattern', '%-tn%', PDO::PARAM_STR);
     $stmt->execute();
     $thumbnails = $stmt->fetchAll(PDO::FETCH_ASSOC);

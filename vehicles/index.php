@@ -134,7 +134,7 @@ switch ($action){
         break;
 
     case 'mod':
-        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invInfo = getInvItemInfo($invId);
         if(count($invInfo)<1){
             $message = 'Sorry, no vehicle information could be found.';

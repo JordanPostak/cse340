@@ -67,11 +67,11 @@ $classificationList .= '</select>';
                 <label for="invDescription">Description:</label>
                 <textarea name="invDescription" id="invDescription" placeholder="Description" <?php if(isset($invDescription)){echo "value='$invDescription'";}  ?> required></textarea>
 
-                <label for="invImage">Image Path:</label>
-                <input type="text" name="invImage" id="invImage" placeholder="Image Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invImage)){echo "value='$invImage'";}  ?> required>
+                <label for="invMiles">Miles:</label>
+                <input type="number" name="invMiles" id="invMiles" placeholder="Miles" <?php if(isset($invMiles)){echo "value='$invMiles'";}  ?> required>
 
-                <label for="invThumbnail">Thumbnail Path:</label>
-                <input type="text" name="invThumbnail" id="invThumbnail" placeholder="Thumbnail Path" value="/phpmotors/images/no-image/no-image.png" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";}  ?> required>
+                <label for="invYear">Year:</label>
+                <input type="number" name="invYear" id="invYear" placeholder="Year" <?php if(isset($invYear)){echo "value='$invYear'";}  ?> required>
 
                 <label for="invPrice">Price:</label>
                 <input type="number" name="invPrice" id="invPrice" placeholder="Price" step="0.01" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> required>
