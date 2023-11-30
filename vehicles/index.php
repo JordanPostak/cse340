@@ -88,8 +88,8 @@ switch ($action){
         $invModel = filter_input(INPUT_POST, 'invModel');
         $invColor = filter_input(INPUT_POST, 'invColor');
         $invDescription = filter_input(INPUT_POST, 'invDescription');
-        $invImage = filter_input(INPUT_POST, 'invImage');
-        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail');
+        $invMiles = filter_input(INPUT_POST, 'invMiles');
+        $invYear = filter_input(INPUT_POST, 'invYear');
         $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_VALIDATE_FLOAT);
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_VALIDATE_INT);
 
@@ -97,7 +97,7 @@ switch ($action){
         if (
             $classificationId === "" || $classificationId === null ||
             empty($invMake) || empty($invModel) || empty($invColor) ||
-            empty($invDescription) || empty($invImage) || empty($invThumbnail) ||
+            empty($invDescription) || empty($invMiles) || empty($invYear) ||
             $invPrice === false || $invPrice === null ||
             $invStock === false || $invStock === null
         ) {
@@ -107,7 +107,7 @@ switch ($action){
         }
 
         // Attempt to insert the vehicle
-        $success = insertVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId);
+        $success = insertVehicle($invMake, $invModel, $invDescription, $invMiles, $invYear, $invPrice, $invStock, $invColor, $classificationId);
 
         if ($success) {
             // If insertion is successful, set a success message
@@ -148,22 +148,22 @@ switch ($action){
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $invMiles = filter_input(INPUT_POST, 'invMiles', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $invYear = filter_input(INPUT_POST, 'invYear', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
         if (empty($classificationId) || empty($invMake) || empty($invModel) 
-        || empty($invDescription) || empty($invImage) || empty($invThumbnail)
+        || empty($invDescription) || empty($invMiles) || empty($invYear)
         || empty($invPrice) || empty($invStock) || empty($invColor)) {
         $message = '<p>Please complete all information for the item! Double check the classification of the item.</p>';
             include '../view/vehicle-update.php';
         exit;
     }
     
-    $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
+    $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invMiles, $invYear, $invPrice, $invStock, $invColor, $classificationId, $invId);
     if ($updateResult) {
         $message = "<p class='notice'>Congratulations, the $invMake $invModel was successfully updated.</p>";
         $_SESSION['message'] = $message;
@@ -189,7 +189,7 @@ switch ($action){
     case 'deleteVehicle':
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         
         $deleteResult = deleteVehicle($invId);
         if ($deleteResult) {
@@ -220,10 +220,10 @@ switch ($action){
     
 
     case 'getVehicle':
-        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // Check if invId is valid
-        if (!isset($invId) || !is_numeric($invId)) {
+        // Check if invId is not empty
+        if (!isset($invId) || empty($invId)) {
             $message = 'Invalid vehicle ID.';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/error.php';
             exit;
