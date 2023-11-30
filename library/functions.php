@@ -43,7 +43,6 @@ function buildClassificationList($classifications){
 function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
-        // Assuming 'imgPath' is the correct key for the image path in the new structure
         $thumbnailPath = $vehicle['imgPath'];
         $vehicleDetailsLink ='/phpmotors/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
 

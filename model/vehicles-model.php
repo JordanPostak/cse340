@@ -36,8 +36,8 @@ function insertVehicle($invMake, $invModel, $invDescription, $invMiles, $invYear
     $db = phpmotorsConnect();
     
     // SQL query to insert a new vehicle
-    $sql = 'INSERT INTO inventory (invMake, invModel, invDescription, invMiles, invYear, invPrice, invStock, invColor, classificationId) 
-            VALUES (:make, :model, :description, :miles, :year, :price, :stock, :color, :classificationId)';
+    $sql = 'INSERT INTO inventory (invId, invMake, invModel, invDescription, invMiles, invYear, invPrice, invStock, invColor, classificationId) 
+            VALUES (UUID(), :make, :model, :description, :miles, :year, :price, :stock, :color, :classificationId)';
     
     // Create a prepared statement
     $stmt = $db->prepare($sql);
