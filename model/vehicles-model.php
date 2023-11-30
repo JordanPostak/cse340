@@ -124,12 +124,11 @@ function updateVehicle($invMake, $invModel, $invDescription, $invMiles, $invYear
     return $rowsChanged;
    }
 
-// function to get a list of vehicles based on the classification
-function getVehiclesByClassification($classificationName){
+   function getVehiclesByClassification($classificationName){
     $db = phpmotorsConnect();
     $sql = 'SELECT i.*, img.imgPath, img.imgPrimary
             FROM inventory i
-            INNER JOIN images img ON i.invId = img.invId
+            LEFT JOIN images img ON i.invId = img.invId
             WHERE i.classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)
             AND img.imgName LIKE :thumbnailPattern
             AND img.imgPrimary = 1';  // Only select rows where imgPrimary is 1

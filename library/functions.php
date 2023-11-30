@@ -41,22 +41,22 @@ function buildClassificationList($classifications){
 
 // function to build a display of vehicles within an unordered list
 function buildVehiclesDisplay($vehicles){
-   $baseURL = '/phpmotors';
-   $dv = '<ul id="inv-display">';
-   foreach ($vehicles as $vehicle) {
-       $thumbnailPath = $baseURL . $vehicle['invThumbnail'];
-       $vehicleDetailsLink = $baseURL . '/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
+    $dv = '<ul id="inv-display">';
+    foreach ($vehicles as $vehicle) {
+        // Assuming 'imgPath' is the correct key for the image path in the new structure
+        $thumbnailPath = $vehicle['imgPath'];
+        $vehicleDetailsLink ='/phpmotors/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
 
-       $dv .= '<li>';
-       $dv .= "<a href='$vehicleDetailsLink'>";
-       $dv .= "<img src='$thumbnailPath' alt='$vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-       $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-       $dv .= '</a>';
-       $dv .= "<p class='price'>Price: $" . number_format($vehicle['invPrice'], 2) . "</p>";
-       $dv .= '</li>';
-   }
-   $dv .= '</ul>';
-   return $dv;
+        $dv .= '<li>';
+        $dv .= "<a href='$vehicleDetailsLink'>";
+        $dv .= "<img src='$thumbnailPath' alt='{$vehicle['invMake']} {$vehicle['invModel']} on phpmotors.com'>";
+        $dv .= "<h2>{$vehicle['invMake']} {$vehicle['invModel']}</h2>";
+        $dv .= '</a>';
+        $dv .= "<p class='price'>Price: $" . number_format($vehicle['invPrice'], 2) . "</p>";
+        $dv .= '</li>';
+    }
+    $dv .= '</ul>';
+    return $dv;
 }
 
 // function to build HTML for displaying detailed information of a specific vehicle

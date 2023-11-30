@@ -31,7 +31,7 @@ $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 switch ($action) {
     case 'upload':
         // Store the incoming vehicle id and primary picture indicator
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_VALIDATE_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $imgPrimary = filter_input(INPUT_POST, 'imgPrimary', FILTER_VALIDATE_INT);
 
         // Store the name of the uploaded image
