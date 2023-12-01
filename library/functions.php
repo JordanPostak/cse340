@@ -43,11 +43,18 @@ function buildClassificationList($classifications){
 function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
-        $thumbnailPath = $vehicle['imgPath'];
-        $vehicleDetailsLink ='/phpmotors/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
+        $vehicleDetailsLink = '/phpmotors/vehicles/?action=getVehicle&invId=' . $vehicle['invId'];
 
         $dv .= '<li>';
         $dv .= "<a href='$vehicleDetailsLink'>";
+
+        // Check if 'imgPath' key exists and is not empty
+        if (isset($vehicle['imgPath']) && !empty($vehicle['imgPath'])) {
+            $thumbnailPath = $vehicle['imgPath'];
+        } else {
+            $thumbnailPath = '/phpmotors/images/no-image/no-image.png';
+        }
+
         $dv .= "<img src='$thumbnailPath' alt='{$vehicle['invMake']} {$vehicle['invModel']} on phpmotors.com'>";
         $dv .= "<h2>{$vehicle['invMake']} {$vehicle['invModel']}</h2>";
         $dv .= '</a>';

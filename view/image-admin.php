@@ -28,11 +28,13 @@ if (isset($_SESSION['message'])) {
             <p>Welcome to the image management page. Please choose one of the options presented below.</p>
 
             <h2>Add New Vehicle Image</h2>
-            <?php
-            if (isset($message)) {
-                echo $message;
-            }
-            ?>
+            <div class="message-container">
+                <?php
+                if (isset($message)) {
+                    echo $message;
+                }
+                ?>
+            </div>
 
             <form action="/phpmotors/uploads/" method="post" enctype="multipart/form-data">
                 <?php echo $prodSelect; ?>

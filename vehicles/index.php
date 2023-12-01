@@ -110,8 +110,10 @@ switch ($action){
         $success = insertVehicle($invMake, $invModel, $invDescription, $invMiles, $invYear, $invPrice, $invStock, $invColor, $classificationId);
 
         if ($success) {
+            // If insertion is successful, redirect to the image upload page
+        header('location: /phpmotors/uploads/?action=upload&invId=' . $invId);
             // If insertion is successful, set a success message
-            $message = 'New vehicle added successfully.';
+            $_SESSION['message'] = 'New vehicle added successfully. It will Not show until you add a main image for it.';
             // Include the "add-vehicle" view to display the success message
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
             exit;
