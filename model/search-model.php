@@ -28,6 +28,9 @@ function countTotalSearchResults($searchQuery) {
     // Close the cursor
     $countStmt->closeCursor();
 
+    // Set totalRecords in session
+    $_SESSION['totalRecords'] = $totalRecords;
+
     return $totalRecords;
 }
 ?>

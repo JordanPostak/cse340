@@ -229,9 +229,12 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
 
 // Function to display search results with thumbnails
 function displaySearchResults($searchResults, $currentPage, $totalPages){
+    
     $dv = '<ul id="search-display">';
     $startIndex = ($currentPage - 1) * 5; // Assuming 5 results per page
     
+
+
     // Loop through results based on the current page
     for ($i = $startIndex; $i < min($startIndex + 5, count($searchResults)); $i++) {
         $result = $searchResults[$i];
@@ -260,7 +263,7 @@ function displaySearchResults($searchResults, $currentPage, $totalPages){
 $dv .= '<div class="pagination">';
 if ($currentPage > 1) {
     // Include the search query in the Previous link
-    $dv .= '<a href="?page=' . ($currentPage - 1) . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">Previous</a>';
+    $dv .= '<a href="?action=performSearchpage=' . ($currentPage - 1) . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">Previous</a>';
 }
 
 for ($i = 1; $i <= $totalPages; $i++) {
@@ -268,13 +271,13 @@ for ($i = 1; $i <= $totalPages; $i++) {
         $dv .= '<span class="current">' . $i . '</span>';
     } else {
         // Include the search query in the pagination links
-        $dv .= '<a href="?page=' . $i . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">' . $i . '</a>';
+        $dv .= '<a href="?action=performSearchpage=' . $i . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">' . $i . '</a>';
     }
 }
 
 if ($currentPage < $totalPages) {
     // Include the search query in the Next link
-    $dv .= '<a href="?page=' . ($currentPage + 1) . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">Next</a>';
+    $dv .= '<a href="?action=performSearchpage=' . ($currentPage + 1) . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">Next</a>';
 }
     
     $dv .= '</div>';

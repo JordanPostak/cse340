@@ -28,12 +28,20 @@
             <hr>    
             <div class="result">
             <?php
-        // Include the search results if available
-        if (!empty($searchResults)) {
-            $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-            // Use the correct total pages value passed from performSearch
-            echo displaySearchResults($searchResults, $currentPage, $totalPages);
+        // Include the search query if available
+        if (!empty($_SESSION['searchQuery'])) {
+            // Fetch total records from session
+            $totalRecords = isset($_SESSION['totalRecords']) ? $_SESSION['totalRecords'] : 0;
+            echo "<h1>Returned $totalRecords Search Results for: " . htmlspecialchars($_SESSION['searchQuery']) . "</h1>";
         }
+
+        // Include the search results if available
+        if (!empty($_SESSION['searchResults'])) {
+            $_SESSION['currentPage'] = 1;
+            // Use the correct total pages value passed from performSearch
+            echo displaySearchResults($_SESSION['searchResults'], $_SESSION['currentPage'], $_SESSION['totalPages']);
+        }
+        var_dump($_SESSION['searchResults'], $_SESSION['currentPage'], $_SESSION['totalPages']);
         ?>
             </div>
         </main>

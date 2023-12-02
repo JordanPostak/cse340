@@ -34,26 +34,27 @@ $action = filter_input(INPUT_POST, 'action');
 // Switch statement for different search actions
 switch ($action) {
     case 'performSearch':
-        // Process the search query and fetch results
-        $searchQuery = filter_input(INPUT_POST, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-        // Get the current page from the URL or set it to 1 by default
-        $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-        var_dump($currentPage);
-
         // Create a connection object from the phpmotors connection function
         $db = phpmotorsConnect();
 
+        // Process the search query and fetch results
+        $_SESSION['searchQuery'] = filter_input(INPUT_POST, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
         // Count the total number of records
-        $totalRecords = countTotalSearchResults($searchQuery);
+        $totalRecords = countTotalSearchResults($_SESSION['searchQuery']);
 
         // Calculate the total number of pages
         $recordsPerPage = 5;
         $totalPages = ceil($totalRecords / $recordsPerPage);
 
+        // Set total pages in session
+        $_SESSION['totalPages'] = $totalPages;
+
+        // Get the current page from the URL or set it to 1 by default
+        $_SESSION['currentPage'] = isset($_GET['page']) ? intval($_GET['page']) : 1;
+
         // Calculate the starting record for the current page
-        $startRecord = ($currentPage - 1) * $recordsPerPage;
+        $startRecord = max(0, ($_SESSION['currentPage'] - 1) * $recordsPerPage);
 
         // SQL query to perform a search using the indexes with LIMIT
         $sql = "SELECT i.*, img.imgPath, img.imgPrimary
@@ -73,7 +74,7 @@ switch ($action) {
         $stmt = $db->prepare($sql);
 
         // Bind the parameter values
-        $stmt->bindValue(':searchQuery', '%' . $searchQuery . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':searchQuery', '%' . $_SESSION['searchQuery'] . '%', PDO::PARAM_STR);
         $stmt->bindValue(':thumbnailPattern', '%-tn%', PDO::PARAM_STR);
         $stmt->bindValue(':startRecord', $startRecord, PDO::PARAM_INT);
         $stmt->bindValue(':recordsPerPage', $recordsPerPage, PDO::PARAM_INT);
@@ -82,7 +83,7 @@ switch ($action) {
         $stmt->execute();
 
         // Fetch the search results
-        $searchResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $_SESSION['searchResults'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Close the cursor
         $stmt->closeCursor();
