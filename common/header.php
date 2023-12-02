@@ -16,7 +16,9 @@
         }
         ?>
     </div>
+    <div class="search"><a href="/phpmotors/search/index.php?action=search" title="Search PHP Motors">&#x1F50D;</a></div>
 </div>
+
 
 
 

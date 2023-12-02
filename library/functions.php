@@ -222,4 +222,63 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
 
    imagedestroy($old_image);
 }
+
+/* * ********************************
+*  Function for working with Search Results
+* ********************************* */
+
+// Function to display search results with thumbnails
+function displaySearchResults($searchResults, $currentPage, $totalPages){
+    $dv = '<ul id="search-display">';
+    $startIndex = ($currentPage - 1) * 5; // Assuming 5 results per page
+    
+    // Loop through results based on the current page
+    for ($i = $startIndex; $i < min($startIndex + 5, count($searchResults)); $i++) {
+        $result = $searchResults[$i];
+        $vehicleDetailsLink = '/phpmotors/vehicles/?action=getVehicle&invId=' . $result['invId'];
+
+        $dv .= '<li>';
+        $dv .= "<a href='$vehicleDetailsLink'>";
+
+        // Check if 'imgPath' key exists and is not empty
+        if (isset($result['imgPath']) && !empty($result['imgPath'])) {
+            $thumbnailPath = $result['imgPath'];
+        } else {
+            $thumbnailPath = '/phpmotors/images/no-image/no-image.png';
+        }
+
+        $dv .= "<img src='$thumbnailPath' alt='{$result['invMake']} {$result['invModel']} on phpmotors.com'>";
+        $dv .= "<h2>{$result['invMake']} {$result['invModel']}</h2>";
+        $dv .= '</a>';
+        $dv .= "<p class='description'>" . ($result['invDescription']) . "</p>";
+        $dv .= '</li>';
+    }
+    $dv .= '</ul>';
+
+
+    // Display pagination links
+$dv .= '<div class="pagination">';
+if ($currentPage > 1) {
+    // Include the search query in the Previous link
+    $dv .= '<a href="?page=' . ($currentPage - 1) . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">Previous</a>';
+}
+
+for ($i = 1; $i <= $totalPages; $i++) {
+    if ($i == $currentPage) {
+        $dv .= '<span class="current">' . $i . '</span>';
+    } else {
+        // Include the search query in the pagination links
+        $dv .= '<a href="?page=' . $i . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">' . $i . '</a>';
+    }
+}
+
+if ($currentPage < $totalPages) {
+    // Include the search query in the Next link
+    $dv .= '<a href="?page=' . ($currentPage + 1) . '&searchQuery=' . urlencode($_POST['searchQuery']) . '">Next</a>';
+}
+    
+    $dv .= '</div>';
+
+    return $dv;
+}
 ?>
