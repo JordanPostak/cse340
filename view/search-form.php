@@ -32,7 +32,7 @@
             
             // Check if variables are set before using them
             if (isset($searchResults, $currentPage, $resultsPerPage, $_SESSION['totalPages'])) {
-                echo "<h1>There are " . countTotalSearchResults($_SESSION['searchQuery']) . " results for '" . $_SESSION['searchQuery'] . "'</h1>";
+                echo "<h1 class=\"center red\">There are " . countTotalSearchResults($_SESSION['searchQuery']) . " results for '" . $_SESSION['searchQuery'] . "'</h1>";
                 echo displaySearchResultsAndPagination($searchResults, $currentPage, $resultsPerPage, $_SESSION['totalPages'], $_SESSION['searchQuery']);
             } else {
                 // Handle the case when variables are not set (e.g., no search query)

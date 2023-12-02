@@ -306,8 +306,11 @@ function calculateTotalPages($totalRecords, $resultsPerPage) {
 // Function to display search results and pagination
 function displaySearchResultsAndPagination($searchResults, $currentPage, $resultsPerPage, $totalPages, $searchQuery) {
 
+     // Display pagination links
+     $output = displayPagination($currentPage, $totalPages, $searchQuery);
+    
     // Display search results
-    $output = displaySearchResults($searchResults, $currentPage, $resultsPerPage);
+    $output .= displaySearchResults($searchResults, $currentPage, $resultsPerPage);
 
     // Display pagination links
     $output .= displayPagination($currentPage, $totalPages, $searchQuery);

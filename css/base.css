@@ -615,6 +615,7 @@ footer {
     padding: 0;
     margin: 20px 0;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .pagination a,
