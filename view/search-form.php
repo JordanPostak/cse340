@@ -36,7 +36,7 @@
                 echo displaySearchResultsAndPagination($searchResults, $currentPage, $resultsPerPage, $_SESSION['totalPages'], $_SESSION['searchQuery']);
             } else {
                 // Handle the case when variables are not set (e.g., no search query)
-                echo "<h1>Enter a search query above.</h1>";
+                echo "<h1 class=\"center red\">Enter a search query above.</h1>";
             }
 
             ?>
