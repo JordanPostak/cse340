@@ -227,17 +227,18 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height) 
 *  Function for working with Search Results
 * ********************************* */
 
-// Function to display search results with thumbnails
-function displaySearchResults($searchResults, $currentPage, $totalPages){
-    
+// Function to display search results
+function displaySearchResults($searchResults, $currentPage, $resultsPerPage) {
+
     $dv = '<ul id="search-display">';
-    $startIndex = ($currentPage - 1) * 5; // Assuming 5 results per page
     
+    // Calculate the starting index based on the current page and results per page
+    $startIndex = ($currentPage - 1) * $resultsPerPage;
 
+    // Get a subset of search results based on the starting index and results per page
+    $pagedResults = array_slice($searchResults, $startIndex, $resultsPerPage);
 
-    // Loop through results based on the current page
-    for ($i = $startIndex; $i < min($startIndex + 5, count($searchResults)); $i++) {
-        $result = $searchResults[$i];
+    foreach ($pagedResults as $result) {
         $vehicleDetailsLink = '/phpmotors/vehicles/?action=getVehicle&invId=' . $result['invId'];
 
         $dv .= '<li>';
@@ -256,32 +257,61 @@ function displaySearchResults($searchResults, $currentPage, $totalPages){
         $dv .= "<p class='description'>" . ($result['invDescription']) . "</p>";
         $dv .= '</li>';
     }
-    $dv .= '</ul>';
 
+    $dv .= '</ul>';
+    return $dv;
+}
+
+// Function to display pagination links
+function displayPagination($currentPage, $totalPages, $searchQuery) {
+    $pagination = '<div class="pagination">';
+    
+    if ($currentPage > 1) {
+        $pagination .= '<a href="' . generatePaginationLink($currentPage - 1, $searchQuery) . '">Previous</a>';
+    }
+
+    for ($i = 1; $i <= $totalPages; $i++) {
+        if ($i == $currentPage) {
+            $pagination .= '<span class="current">' . $i . '</span>';
+        } else {
+            $pagination .= '<a href="' . generatePaginationLink($i, $searchQuery) . '">' . $i . '</a>';
+        }
+    }
+
+    if ($currentPage < $totalPages) {
+        $pagination .= '<a href="' . generatePaginationLink($currentPage + 1, $searchQuery) . '">Next</a>';
+    }
+
+    $pagination .= '</div>';
+    return $pagination;
+}
+
+// Function to generate pagination link
+function generatePaginationLink($currentPage, $searchQuery) {
+    $query = empty($searchQuery) ? '' : '&searchQuery=' . urlencode($searchQuery);
+    return '?action=performSearch&page=' . $currentPage . $query;
+}
+
+// Function to calculate total pages
+function calculateTotalPages($totalRecords, $resultsPerPage) {
+    // Handle the case when $resultsPerPage is NULL or 0
+    if (!$resultsPerPage || $resultsPerPage <= 0) {
+        return 1; // Return at least 1 page
+    }
+
+    // Calculate total pages
+    return ceil($totalRecords / $resultsPerPage);
+}
+
+// Function to display search results and pagination
+function displaySearchResultsAndPagination($searchResults, $currentPage, $resultsPerPage, $totalPages, $searchQuery) {
+
+    // Display search results
+    $output = displaySearchResults($searchResults, $currentPage, $resultsPerPage);
 
     // Display pagination links
-$dv .= '<div class="pagination">';
-if ($currentPage > 1) {
-    // Include the search query in the Previous link
-    $dv .= '<a href="?action=performSearchpage=' . ($currentPage - 1) . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">Previous</a>';
-}
+    $output .= displayPagination($currentPage, $totalPages, $searchQuery);
 
-for ($i = 1; $i <= $totalPages; $i++) {
-    if ($i == $currentPage) {
-        $dv .= '<span class="current">' . $i . '</span>';
-    } else {
-        // Include the search query in the pagination links
-        $dv .= '<a href="?action=performSearchpage=' . $i . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">' . $i . '</a>';
-    }
-}
-
-if ($currentPage < $totalPages) {
-    // Include the search query in the Next link
-    $dv .= '<a href="?action=performSearchpage=' . ($currentPage + 1) . '&searchQuery=' . urlencode($_SESSION['searchQuery']) . '">Next</a>';
-}
-    
-    $dv .= '</div>';
-
-    return $dv;
+    return $output;
 }
 ?>

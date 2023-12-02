@@ -28,21 +28,18 @@
             <hr>    
             <div class="result">
             <?php
-        // Include the search query if available
-        if (!empty($_SESSION['searchQuery'])) {
-            // Fetch total records from session
-            $totalRecords = isset($_SESSION['totalRecords']) ? $_SESSION['totalRecords'] : 0;
-            echo "<h1>Returned $totalRecords Search Results for: " . htmlspecialchars($_SESSION['searchQuery']) . "</h1>";
-        }
+            
+            
+            // Check if variables are set before using them
+            if (isset($searchResults, $currentPage, $resultsPerPage, $_SESSION['totalPages'])) {
+                echo "<h1>There are " . countTotalSearchResults($_SESSION['searchQuery']) . " results for '" . $_SESSION['searchQuery'] . "'</h1>";
+                echo displaySearchResultsAndPagination($searchResults, $currentPage, $resultsPerPage, $_SESSION['totalPages'], $_SESSION['searchQuery']);
+            } else {
+                // Handle the case when variables are not set (e.g., no search query)
+                echo "<h1>Enter a search query above.</h1>";
+            }
 
-        // Include the search results if available
-        if (!empty($_SESSION['searchResults'])) {
-            $_SESSION['currentPage'] = 1;
-            // Use the correct total pages value passed from performSearch
-            echo displaySearchResults($_SESSION['searchResults'], $_SESSION['currentPage'], $_SESSION['totalPages']);
-        }
-        var_dump($_SESSION['searchResults'], $_SESSION['currentPage'], $_SESSION['totalPages']);
-        ?>
+            ?>
             </div>
         </main>
         <footer>

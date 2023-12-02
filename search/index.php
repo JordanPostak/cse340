@@ -34,61 +34,30 @@ $action = filter_input(INPUT_POST, 'action');
 // Switch statement for different search actions
 switch ($action) {
     case 'performSearch':
-        // Create a connection object from the phpmotors connection function
-        $db = phpmotorsConnect();
 
         // Process the search query and fetch results
         $_SESSION['searchQuery'] = filter_input(INPUT_POST, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-        // Count the total number of records
-        $totalRecords = countTotalSearchResults($_SESSION['searchQuery']);
+         // Check if searchQuery is empty and retrieve it from $_GET if needed
+        if (empty($_SESSION['searchQuery']) && isset($_GET['searchQuery'])) {
+            $_SESSION['searchQuery'] = filter_input(INPUT_GET, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        }
 
-        // Calculate the total number of pages
-        $recordsPerPage = 5;
-        $totalPages = ceil($totalRecords / $recordsPerPage);
-
-        // Set total pages in session
-        $_SESSION['totalPages'] = $totalPages;
+        $searchResults = searchResults($_SESSION['searchQuery']);
 
         // Get the current page from the URL or set it to 1 by default
-        $_SESSION['currentPage'] = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-        // Calculate the starting record for the current page
-        $startRecord = max(0, ($_SESSION['currentPage'] - 1) * $recordsPerPage);
+        // Set the results per page
+        $resultsPerPage = 5;
 
-        // SQL query to perform a search using the indexes with LIMIT
-        $sql = "SELECT i.*, img.imgPath, img.imgPrimary
-                FROM inventory i
-                LEFT JOIN images img ON i.invId = img.invId
-                WHERE 
-                    (i.invMake LIKE :searchQuery 
-                    OR i.invModel LIKE :searchQuery 
-                    OR i.invDescription LIKE :searchQuery 
-                    OR i.invColor LIKE :searchQuery 
-                    OR i.invYear LIKE :searchQuery)
-                    AND img.imgName LIKE :thumbnailPattern
-                    AND img.imgPrimary = 1
-                LIMIT :startRecord, :recordsPerPage";
+        // Get the total number of search results
+        $totalRecords = countTotalSearchResults($_SESSION['searchQuery']);
 
-        // Create a prepared statement
-        $stmt = $db->prepare($sql);
+        // Calculate total pages
+        $_SESSION['totalPages'] = calculateTotalPages($totalRecords, $resultsPerPage);
 
-        // Bind the parameter values
-        $stmt->bindValue(':searchQuery', '%' . $_SESSION['searchQuery'] . '%', PDO::PARAM_STR);
-        $stmt->bindValue(':thumbnailPattern', '%-tn%', PDO::PARAM_STR);
-        $stmt->bindValue(':startRecord', $startRecord, PDO::PARAM_INT);
-        $stmt->bindValue(':recordsPerPage', $recordsPerPage, PDO::PARAM_INT);
-
-        // Execute the prepared statement
-        $stmt->execute();
-
-        // Fetch the search results
-        $_SESSION['searchResults'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Close the cursor
-        $stmt->closeCursor();
-
-        // Display the search form which includes the results and pagination
+        // Display the search results and pagination view
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/search-form.php';
         exit(); // Stop further execution after sending the response
         break;
