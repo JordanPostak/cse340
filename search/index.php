@@ -36,11 +36,14 @@ switch ($action) {
     case 'performSearch':
 
         // Process the search query and fetch results
-        $_SESSION['searchQuery'] = filter_input(INPUT_POST, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $searchQuery = filter_input(INPUT_POST, 'searchQuery', FILTER_SANITIZE_EMAIL);
+        $_SESSION['searchQuery'] =strip_tags($searchQuery);
 
          // Check if searchQuery is empty and retrieve it from $_GET if needed
         if (empty($_SESSION['searchQuery']) && isset($_GET['searchQuery'])) {
-            $_SESSION['searchQuery'] = filter_input(INPUT_GET, 'searchQuery', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $_SESSION['searchQuery'] = filter_input(INPUT_GET, 'searchQuery', FILTER_SANITIZE_EMAIL);
+            $_SESSION['searchQuery'] =strip_tags($searchQuery);
+
         }
 
         $searchResults = searchResults($_SESSION['searchQuery']);

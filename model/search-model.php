@@ -64,4 +64,5 @@ function countTotalSearchResults($searchQuery) {
 
     return $totalRecords;
 }
+
 ?>
